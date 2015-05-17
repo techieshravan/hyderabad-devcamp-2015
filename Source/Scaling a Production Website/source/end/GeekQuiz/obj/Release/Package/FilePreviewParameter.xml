@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="hyderabadgeeksquiz2015" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\shravank\\Desktop\\Dev\ Web\ Camps\\Running,\ improving\ and\ maintaining\ a\ site\ in\ the\ real\ world\\demos\\Scaling\ a\ Production\ Website\\source\\end\\GeekQuiz\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\shravank\\Desktop\\Dev\ Web\ Camps\\Running,\ improving\ and\ maintaining\ a\ site\ in\ the\ real\ world\\demos\\Scaling\ a\ Production\ Website\\source\\end\\GeekQuiz\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=tiob6koyxt.database.windows.net;Initial Catalog=GeekQuiz;Integrated Security=False;User ID=dbadmin;Password=N0P@ssw0rd1;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\shravank\\Desktop\\Dev\ Web\ Camps\\Running,\ improving\ and\ maintaining\ a\ site\ in\ the\ real\ world\\demos\\Scaling\ a\ Production\ Website\\source\\end\\GeekQuiz\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

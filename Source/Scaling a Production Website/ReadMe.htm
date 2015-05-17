@@ -1,0 +1,334 @@
+<p><a name="title" /></p>
+
+<h1>Scaling a production web site</h1>
+
+<hr>
+
+<h2>Overview</h2>
+
+<p>In this demo you will go through the steps required to configure auto-scaling in a <em>Azure Web Site</em> and demostrate this feature using a Visual Studio Load test. Additionally, you will see how to scale a site using <em>Azure Storage</em>.</p>
+
+<p><a id="goals" /></p>
+
+<h3>Goals</h3>
+
+<p>In this demo, you will see how to:</p>
+
+<ol>
+<li>Configure auto-scaling for a website using the <em>Azure portal</em></li>
+<li>Create and configure a load test project in <em>Visual Studio</em></li>
+<li>Use <em>Azure Storage</em> to scale a website</li>
+</ol>
+
+<p><a name="technologies" /></p>
+
+<h3>Key Technologies</h3>
+
+<ul>
+<li><a href="http://www.microsoft.com/visualstudio/eng/visual-studio-2013">Microsoft Visual Studio 2013</a></li>
+<li><a href="http://www.windowsazure.com">Azure</a></li>
+</ul>
+
+<p><a name="setup" /></p>
+
+<h3>Setup and Configuration</h3>
+
+<p>Follow these steps to setup your environment for the demo.</p>
+
+<ol>
+<li><p>Follow the steps detailed in <a href="http://docs.nuget.org/docs/creating-packages/hosting-your-own-nuget-feeds">this link</a> to setup local sources for the following directories:</p>
+
+<ol>
+<li><strong>C:\Program Files (x86)\Microsoft Web Tools\Packages</strong></li>
+<li><strong>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Stack 5\Packages</strong></li>
+</ol>
+
+<p><img src="images/nuget-sources.png?raw=true" alt="NuGet Sources">
+</p></li>
+<li><p>Create a <em>Azure storage account</em> (e.g. <em>geekquizstorage</em>), create a blob container named <em>images</em> and upload the <strong>logo-big.png</strong> image located inside the <strong>source\assets</strong> folder.</p></li>
+<li><p>Open the <strong>GeekQuiz.sln</strong> solution located under the <strong>source\end</strong> folder. Find the '<system.webServer>' element in the <strong>web.config</strong> file and change the url of the <strong>Redirect</strong> action using the <em>Azure storage account</em> you have just created.</p>
+
+<p><img src="images/highlighting-rewrite-rule.png?raw=true" alt="Updating the Rewrite Rule" title="Updating the Rewrite Rule">
+</p>
+
+<p><em>Updating the Rewrite Rule</em></p></li>
+<li><p>Create a (free) web site in Azure and deploy the web site that is part of the <strong>GeekQuiz.sln</strong> solution located under the <strong>source\end</strong> folder.</p></li>
+<li><p>Register a new user account.</p></li>
+<li><p>Open the <strong>StressGeekQuiz.sln</strong> solution located under <strong>source\end</strong>.</p></li>
+<li><p>In the <strong>Solution Explorer</strong>, double-click <strong>WebTest1.webtest</strong>.</p></li>
+<li><p>Select the <strong><a href="http://geekquizdemo.azurewebsites.net">http://geekquizdemo.azurewebsites.net</a></strong> node, as shown in the following figure.</p>
+
+<p><img src="images/node-selection.png?raw=true" alt="Selecting the Loop child node" title="Selecting the Loop child node">
+</p>
+
+<p><em>Selecting the Loop child node</em></p></li>
+<li><p>In the <strong>Properties</strong> window, update the <strong>Url</strong> field to point to the site you just created.</p>
+
+<p><img src="images/url-change.png?raw=true" alt="Changing the Url" title="Changing the Url">
+</p>
+
+<p><em>Changing the Url</em></p></li>
+<li><p>Save all files and close the solution.</p></li>
+</ol>
+
+<p><a name="Demo" /></p>
+
+<h2>Demo</h2>
+
+<p>This demo is composed of the following segments:</p>
+
+<ol>
+<li><a href="#segment1">Configuring auto-scaling</a></li>
+<li><a href="#segment2">Load testing with Visual Studio</a></li>
+<li><a href="#segment3">Scaling GeekQuiz using Azure storage</a></li>
+<li><a href="#segment4">Auto-scaling result</a></li>
+</ol>
+
+<p><a name="segment1" /></p>
+
+<h3>Configuring auto-scaling</h3>
+
+<ol>
+<li><p>Open the <a href="https://manage.windowsazure.com/">Azure Management portal</a> and log in with your credentials.</p></li>
+<li><p>Select the <strong>WEB SITES</strong> tab.</p>
+
+<p><img src="images/web-sites.png?raw=true" alt="Opening the Web site tab" title="Opening the Web site tab">
+</p>
+
+<p><em>Opening the Web site tab</em></p></li>
+<li><p>Click the website where you deployed GeekQuiz during the setup steps.</p></li>
+<li><p>Open the scaling configuration page.</p>
+
+<p><img src="images/scale.png?raw=true" alt="Opening the Scaling configuration page" title="Opening the Scaling configuration page">
+</p>
+
+<p><em>Opening the Scaling configuration page</em></p></li>
+<li><p>Change the web site's mode to <strong>Standard</strong>.</p>
+
+<p><img src="images/web-site-mode.png?raw=true" alt="Changing the web site's mode to Standard" title="Changing the web site's mode to Standard">
+</p>
+
+<p><em>Changing the web site's mode to Standard</em></p></li>
+<li><p>Clear all other web sites from the list of sites to be updated.</p>
+
+<p><img src="images/clear-web-sites.png?raw=true" alt="Clearing all other Web Sites" title="Clearing all other Web Sites">
+</p>
+
+<p><em>Clearing all other Web Sites</em></p></li>
+<li><p>Show that there is only one instance.</p>
+
+<p><img src="images/one-instance.png?raw=true" alt="Showing that there is only one instance" title="Showing that there is only one instance">
+</p>
+
+<p><em>Showing that there is only one instance</em></p></li>
+<li><p>Select the <strong>CPU</strong> metric for scaling.</p>
+
+<p><img src="images/cpu-scaling.png?raw=true" alt="Selecting the CPU metric for scaling" title="Selecting the CPU metric for scaling">
+</p>
+
+<p><em>Selecting the CPU metric for scaling</em></p></li>
+<li><p>Change the target CPU to <strong>20</strong>-<strong>40</strong>.</p>
+
+<p><img src="images/target-cpu.png?raw=true" alt="Changing the target CPU" title="Changing the target CPU">
+</p>
+
+<p><em>Changing the target CPU</em></p>
+<blockquote>
+<p><strong>Speaking point:</strong> Explain that this is done as we cannot ensure that a bigger load is generated with VS.</p>
+</blockquote></li>
+<li><p>Save the changes. </p>
+<blockquote>
+<p><strong>Note:</strong> Don't close the management portal.</p>
+</blockquote></li>
+</ol>
+
+<p><a name="segment2" /></p>
+
+<h3>Load testing with Visual Studio</h3>
+
+<ol>
+<li><p>Open the <strong>StressGeekQuiz.sln</strong> solution located under <strong>source\end</strong>.</p></li>
+<li><p>In the <strong>Solution Explorer</strong>, double-click <strong>LoadTest1.loadtest</strong>.</p></li>
+<li><p>Run the load test.</p>
+
+<p><img src="images/run-load-test.png?raw=true" alt="Running the load test" title="Running the load test">
+</p>
+
+<p><em>Running the load test</em></p></li>
+<li><p>Open a new instance of Visual Studio.</p>
+<blockquote>
+<p><strong>Speaking point:</strong> Let's take a look at how that solution can be built.</p>
+</blockquote></li>
+<li><p>Open the <strong>New Project</strong> dialog.</p></li>
+<li><p>Select <strong>Test</strong> in the templates tree, and select <strong>Web Performance and Load Test project</strong>.</p>
+
+<p><img src="images/test-project.png?raw=true" alt="Creating the new load test project">
+</p>
+
+<p><em>Creating the new load test project</em></p></li>
+<li><p>Click <strong>OK</strong>.</p></li>
+<li><p>Right-click <strong>WebTest1</strong> and select <strong>Add Request</strong>.</p>
+
+<p><img src="images/add-request.png?raw=true" alt="Adding a request" title="Adding a request">
+</p>
+
+<p><em>Adding a request</em></p></li>
+<li><p>Select the new node.</p></li>
+<li><p>In the <strong>Properties</strong> window, update the <strong>Url</strong> field to point to the Azure web site.</p>
+
+<p><img src="images/url-change.png?raw=true" alt="Changing the Url property" title="Changing the Url property">
+</p>
+
+<p><em>Changing the Url property</em></p></li>
+<li><p>Right-click <strong>WebTest1</strong> and select <strong>Add Loop...</strong>.</p>
+
+<p><img src="images/add-loop.png?raw=true" alt="Adding a loop" title="Adding a loop">
+</p>
+
+<p><em>Adding a loop</em></p></li>
+<li><p>Select the <strong>For Loop</strong> rule.</p>
+
+<p><img src="images/for-loop.png?raw=true" alt="Selecting the For Loop" title="Selecting the For Loop">
+</p>
+
+<p><em>Selecting the For Loop</em></p></li>
+<li><p>Update the following values:</p>
+
+<ol>
+<li><strong>Terminating value:</strong> 1000.</li>
+<li><strong>Context Parameter Name:</strong> Iterator.</li>
+<li><strong>Increment Value:</strong> 1.</li>
+</ol>
+
+<p><img src="images/values.png?raw=true" alt="Updating the configuration values" title="Updating the configuration values">
+</p>
+
+<p><em>Updating the configuration values</em></p></li>
+<li><p>Select the GeekQuiz request as the first and last item of the loop.</p>
+
+<p><img src="images/items.png?raw=true" alt="Selecting the items for the loop" title="Selecting the items for the loop">
+</p>
+
+<p><em>Selecting the items for the loop</em></p></li>
+<li><p>Click <strong>OK</strong>.</p></li>
+<li><p>In the <strong>Solution Explorer</strong>, right-click the <strong>WebAndLoadTestProject1</strong> project, expand the <strong>Add</strong> menu and select <strong>Load Test...</strong>. A wizard will start.</p>
+
+<p><img src="images/load-test.png?raw=true" alt="Adding a Load Test" title="Adding a Load Test">
+</p>
+
+<p><em>Adding a Load Test</em></p></li>
+<li><p>In the <strong>New Load Test Wizard</strong> dialog, click <strong>Next</strong>.</p></li>
+<li><p>Select <strong>Do not use think times</strong> and click <strong>Next</strong>.</p>
+
+<p><img src="images/think-times.png?raw=true" alt="Selecting not to use Think times" title="Selecting not to use Think times">
+</p>
+
+<p><em>Selecting not to use Think times</em></p></li>
+<li><p>Change the <strong>User Count</strong> to <strong>250</strong> users and click <strong>Next</strong>.</p>
+
+<p><img src="images/user-count.png?raw=true" alt="Changing the user count" title="Changing the user count">
+</p>
+
+<p><em>Changing the user count</em></p></li>
+<li><p>Select <strong>Based on sequential test order</strong> and click <strong>Next</strong>.</p>
+
+<p><img src="images/text-mix.png?raw=true" alt="Selecting the test mix model" title="Selecting the test mix model">
+</p>
+
+<p><em>Selecting the test mix model</em></p></li>
+<li><p>Click <strong>Add...</strong>.</p></li>
+<li><p>Double-click <strong>Web Test 1</strong> and click <strong>OK</strong>.</p>
+
+<p><img src="images/add-tests.png?raw=true" alt="Adding the test" title="Adding the test">
+</p>
+
+<p><em>Adding the test</em></p></li>
+<li><p>Click <strong>Next</strong>.</p></li>
+<li><p>In the <strong>Network Mix</strong> page, click <strong>Next</strong>.</p></li>
+<li><p>Select <strong>Internet Explorer 10.0</strong> as the browser type and click <strong>Next</strong>.</p>
+
+<p><img src="images/browser-type.png?raw=true" alt="Selecting the Browser Type" title="Selecting the Browser Type">
+</p>
+
+<p><em>Selecting the Browser Type</em></p></li>
+<li><p>In the <strong>Counter Sets</strong> page, click <strong>Next</strong>.</p></li>
+<li><p>Set the load test duration to 5 minutes and click <strong>Finish</strong>.</p>
+
+<p><img src="images/load-test-duration.png?raw=true" alt="Setting the load test duration" title="Setting the load test duration">
+</p>
+
+<p><em>Setting the load test duration</em></p></li>
+<li><p>Close the current instance of <strong>Visual Studio</strong>.</p></li>
+</ol>
+
+<p><a name="segment3" /></p>
+
+<h3>Scaling GeekQuiz using Azure storage</h3>
+
+<ol>
+<li><p>Open <em>Internet Explorer</em>.</p></li>
+<li><p>Navigate to the image that you uploaded to <em>Azure Storage</em> during setup. For example, if the name of the storage account is <em>geekquizstorage</em> the URL for the image will be <em><a href="http://geekquizstorage.blob.core.windows.net/images/logo-big.png">http://geekquizstorage.blob.core.windows.net/images/logo-big.png</a></em>.</p>
+
+<p><img src="images/logo-big.png?raw=true" alt="Showing the logo" title="Showing the logo">
+</p>
+
+<p><em>Showing the logo</em></p></li>
+<li><p>Open the <strong>GeekQuilz.sln</strong> solution located under <strong>source\end</strong>.</p></li>
+<li><p>Open the site's <strong>web.config</strong> file for edition.</p></li>
+<li><p>Find the <code>&lt;system.webServer&gt;</code> element.</p></li>
+<li><p>Highlight the URL rewrite rule as shown in the following figure.</p>
+
+<p><img src="images/highlighting-rewrite-rule.png?raw=true" alt="Highlighting the Rewrite Rule" title="Highlighting the Rewrite Rule">
+</p>
+
+<p><em>Highlighting the Rewrite Rule</em></p></li>
+<li><p>Back in Internet Explorer, open the deployed GeekQuiz site (log in if necessary).</p>
+
+<p><img src="images/geek-quiz-with-image.png?raw=true" alt="Showing the Geek Quiz website with the image" title="Showing the Geek Quiz website with the image">
+</p>
+
+<p><em>Showing the Geek Quiz website with the image</em></p></li>
+<li><p>Press <strong>F12</strong> to launch the development tools, select the <strong>Network</strong> tab and start recording.</p>
+
+<p><img src="images/start-recording.png?raw=true" alt="Starting the network recording" title="Starting the network recording">
+</p>
+
+<p><em>Starting the network recording</em></p></li>
+<li><p>Press <strong>CTRL + F5</strong> to refresh the web page.</p></li>
+<li><p>Once the page has finished loading, switch back to the development tools and show that the request for the image was redirected to <em>Azure storage</em>.</p>
+
+<p><img src="images/redirect-in-dev-tools.png?raw=true" alt="Showing the redirect in Dev Tools" title="Showing the redirect in Dev Tools">
+</p>
+
+<p><em>Showing the redirect in Dev Tools</em></p></li>
+</ol>
+
+<p><a name="segment4" /></p>
+
+<h3>Auto-scaling result</h3>
+
+<ol>
+<li><p>Back in the management portal, press <strong>CTRL + F5</strong> to refresh the page.</p></li>
+<li><p>Show that a new instance was automatically deployed.</p>
+
+<p><img src="images/new-instance.png?raw=true" alt="Showing that the new instance" title="Showing that the new instance">
+</p>
+
+<p><em>Showing that the new instance</em></p></li>
+</ol>
+
+<hr>
+
+<p><a name="summary" /></p>
+
+<h2>Summary</h2>
+
+<p>By completing this demo you should have:</p>
+
+<ol>
+<li>Configured auto-scaling for a website using the <em>Azure portal</em></li>
+<li>Created a load test project in <em>Visual Studio</em></li>
+<li>Used <em>Azure Storage</em> to scale the static content of a web site</li>
+</ol>
+
+<hr>
