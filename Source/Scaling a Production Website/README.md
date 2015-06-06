@@ -1,6 +1,3 @@
-<a name="title"></a>
-
-<a name="title">
 
 # Scaling a production web site
 
@@ -10,12 +7,6 @@
 
 In this demo you will go through the steps required to configure auto-scaling in a _Azure Web Site_ and demostrate this feature using a Visual Studio Load test. Additionally, you will see how to scale a site using _Azure Storage_.
 
-</a>
-
-<a name="title"></a><a id="goals"></a>
-
-<a id="goals">
-
 ### Goals
 
 In this demo, you will see how to:
@@ -24,34 +15,16 @@ In this demo, you will see how to:
 2.  Create and configure a load test project in _Visual Studio_
 3.  Use _Azure Storage_ to scale a website
 
-</a>
-
-<a id="goals"></a><a name="technologies"></a>
-
-<a name="technologies">
-
 ### Key Technologies
 
-</a>
-
-<a name="technologies"></a>
-*   <a name="technologies"></a>[Microsoft Visual Studio 2013](http://www.microsoft.com/visualstudio/eng/visual-studio-2013)
-*   [Azure](http://www.windowsazure.com)
-
-<a name="setup"></a>
-
-<a name="setup">
+* [Microsoft Visual Studio 2013](http://www.microsoft.com/visualstudio/eng/visual-studio-2013)
+* [Azure](http://www.windowsazure.com)
 
 ### Setup and Configuration
 
 Follow these steps to setup your environment for the demo.
 
-</a>
-
-<a name="setup"></a>
-2.  <a name="setup"></a>
-
-    <a name="setup">Follow the steps detailed in</a> [this link](http://docs.nuget.org/docs/creating-packages/hosting-your-own-nuget-feeds) to setup local sources for the following directories:
+1. Follow the steps detailed in [this link](http://docs.nuget.org/docs/creating-packages/hosting-your-own-nuget-feeds) to setup local sources for the following directories:
 
     1.  **C:\Program Files (x86)\Microsoft Web Tools\Packages**
     2.  **C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Stack 5\Packages**
@@ -88,74 +61,58 @@ Follow these steps to setup your environment for the demo.
 
 11.  Save all files and close the solution.
 
-<a name="Demo"></a>
-
-<a name="Demo">
-
 ## Demo
 
 This demo is composed of the following segments:
 
-</a>
-
-<a name="Demo"></a>
-2.  <a name="Demo"></a>[Configuring auto-scaling](#segment1)
-3.  [Load testing with Visual Studio](#segment2)
-4.  [Scaling GeekQuiz using Azure storage](#segment3)
-5.  [Auto-scaling result](#segment4)
-
-<a name="segment1"></a>
-
-<a name="segment1">
+1.  [Configuring auto-scaling](#segment1)
+2.  [Load testing with Visual Studio](#segment2)
+3.  [Scaling GeekQuiz using Azure storage](#segment3)
+4.  [Auto-scaling result](#segment4)
 
 ### Configuring auto-scaling
 
-</a>
+1. Open the [Azure Management portal](https://manage.windowsazure.com/) and log in with your credentials.
 
-<a name="segment1"></a>
-2.  <a name="segment1"></a>
-
-    <a name="segment1">Open the</a> [Azure Management portal](https://manage.windowsazure.com/) and log in with your credentials.
-
-3.  Select the **WEB SITES** tab.
+2.  Select the **WEB SITES** tab.
 
     ![Opening the Web site tab](images/web-sites.png?raw=true "Opening the Web site tab")
 
     _Opening the Web site tab_
 
-4.  Click the website where you deployed GeekQuiz during the setup steps.
+3.  Click the website where you deployed GeekQuiz during the setup steps.
 
-5.  Open the scaling configuration page.
+4.  Open the scaling configuration page.
 
     ![Opening the Scaling configuration page](images/scale.png?raw=true "Opening the Scaling configuration page")
 
     _Opening the Scaling configuration page_
 
-6.  Change the web site's mode to **Standard**.
+5.  Change the web site's mode to **Standard**.
 
     ![Changing the web site's mode to Standard](images/web-site-mode.png?raw=true "Changing the web site's mode to Standard")
 
     _Changing the web site's mode to Standard_
 
-7.  Clear all other web sites from the list of sites to be updated.
+6.  Clear all other web sites from the list of sites to be updated.
 
     ![Clearing all other Web Sites](images/clear-web-sites.png?raw=true "Clearing all other Web Sites")
 
     _Clearing all other Web Sites_
 
-8.  Show that there is only one instance.
+7.  Show that there is only one instance.
 
     ![Showing that there is only one instance](images/one-instance.png?raw=true "Showing that there is only one instance")
 
     _Showing that there is only one instance_
 
-9.  Select the **CPU** metric for scaling.
+8.  Select the **CPU** metric for scaling.
 
     ![Selecting the CPU metric for scaling](images/cpu-scaling.png?raw=true "Selecting the CPU metric for scaling")
 
     _Selecting the CPU metric for scaling_
 
-10.  Change the target CPU to **20**-**40**.
+9.  Change the target CPU to **20**-**40**.
 
     ![Changing the target CPU](images/target-cpu.png?raw=true "Changing the target CPU")
 
@@ -163,13 +120,9 @@ This demo is composed of the following segments:
 
     > **Speaking point:** Explain that this is done as we cannot ensure that a bigger load is generated with VS.
 
-11.  Save the changes.
+10.  Save the changes.
 
     > **Note:** Don't close the management portal.
-
-<a name="segment2"></a>
-
-<a name="segment2">
 
 ### Load testing with Visual Studio
 
@@ -295,22 +248,11 @@ This demo is composed of the following segments:
 
 28.  Close the current instance of **Visual Studio**.
 
-</a>
-
-<a name="segment2"></a><a name="segment3"></a>
-
-<a name="segment3">
-
 ### Scaling GeekQuiz using Azure storage
 
-</a>
-
-<a name="segment3">*   Open _Internet Explorer_.
-
-    </a>
-2.  <a name="segment3"></a>
-
-    <a name="segment3">Navigate to the image that you uploaded to _Azure Storage_ during setup. For example, if the name of the storage account is _geekquizstorage_ the URL for the image will be </a>_[http://geekquizstorage.blob.core.windows.net/images/logo-big.png](http://geekquizstorage.blob.core.windows.net/images/logo-big.png)_.
+1. Open _Internet Explorer_.
+   
+2. Navigate to the image that you uploaded to Azure Storage during setup. For example, if the name of the storage account is _geekquizstorage_ the URL for the image will be [http://geekquizstorage.blob.core.windows.net/images/logo-big.png](http://geekquizstorage.blob.core.windows.net/images/logo-big.png).
 
     ![Showing the logo](images/logo-big.png?raw=true "Showing the logo")
 
@@ -348,10 +290,6 @@ This demo is composed of the following segments:
 
     _Showing the redirect in Dev Tools_
 
-<a name="segment4"></a>
-
-<a name="segment4">
-
 ### Auto-scaling result
 
 1.  Back in the management portal, press **CTRL + F5** to refresh the page.
@@ -364,12 +302,6 @@ This demo is composed of the following segments:
 
 * * *
 
-</a>
-
-<a name="segment4"></a><a name="summary"></a>
-
-<a name="summary">
-
 ## Summary
 
 By completing this demo you should have:
@@ -379,5 +311,3 @@ By completing this demo you should have:
 3.  Used _Azure Storage_ to scale the static content of a web site
 
 * * *
-
-</a>
