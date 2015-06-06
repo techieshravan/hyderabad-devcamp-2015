@@ -13,8 +13,8 @@ In this demo, you will see how to:
 
 ### Key Technologies
 
-1.  [Entity Framework 6](http://entityframework.codeplex.com/wikipage?title=specs).
-2.  [Git](http://git-scm.com/).
+1.  [Entity Framework 6](http://entityframework.codeplex.com/wikipage?title=specs)
+2.  [Git](http://git-scm.com/)
 
 ### Setup and Configuration
 
