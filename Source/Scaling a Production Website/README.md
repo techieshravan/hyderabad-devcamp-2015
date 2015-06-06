@@ -1,7 +1,4 @@
-
 # Scaling a production web site
-
-## Overview
 
 In this demo you will go through the steps required to configure auto-scaling in a _Azure Web Site_ and demostrate this feature using a Visual Studio Load test. Additionally, you will see how to scale a site using _Azure Storage_.
 
