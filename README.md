@@ -1,4 +1,4 @@
-# Hyderabad DevCamps 2015
+# Hyderabad DevCamp 2015
 
 This repository contains following demos and presentation shown in Hyderabad DevCamp 2015.
 
